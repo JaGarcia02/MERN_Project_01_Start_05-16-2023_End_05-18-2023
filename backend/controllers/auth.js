@@ -56,7 +56,16 @@ export const login = async (req, res) => {
     }
 
     // jwt token signing
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      {
+        id: user.id,
+        firstname: user.firstName,
+        lastname: user.lastName,
+        location: user.location,
+        occupation: user.occupation,
+      },
+      process.env.JWT_SECRET
+    );
     return res.status(200).json({ token, user });
   } catch (error) {
     return res.status(500).json({ message: error.message });

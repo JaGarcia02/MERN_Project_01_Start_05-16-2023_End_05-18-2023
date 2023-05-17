@@ -12,14 +12,23 @@ import NavBar from "./components/NavBar";
 function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+
+  // to check if there is a token
+  const isAuth = Boolean(useSelector(state.token));
   return (
     <div className="app">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/profile/:userId" element={<ProfilePage />} />
+          <Route
+            path="/home"
+            element={isAuth ? <HomePage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/profile/:userId"
+            element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
+          />
         </Routes>
       </ThemeProvider>
     </div>
