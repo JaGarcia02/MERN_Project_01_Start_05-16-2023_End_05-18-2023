@@ -12,9 +12,9 @@ import NavBar from "./components/NavBar";
 function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-
   // to check if there is a token
-  const isAuth = Boolean(useSelector(state.token));
+  const isAuth = Boolean(useSelector((state) => state.token));
+
   return (
     <div className="app">
       <ThemeProvider theme={theme}>
