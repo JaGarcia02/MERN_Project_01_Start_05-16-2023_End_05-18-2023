@@ -32,9 +32,9 @@ const NavBar = () => {
   /* Redux */
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useDispatch((state) => state.user);
+  const user = useSelector((state) => state.user);
 
-  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   /* Theme Display */
   const theme = useTheme();
@@ -60,7 +60,7 @@ const NavBar = () => {
             },
           }}
         >
-          Sociopedia
+          JaPedia
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
