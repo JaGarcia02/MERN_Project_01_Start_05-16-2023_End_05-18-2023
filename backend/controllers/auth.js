@@ -63,6 +63,7 @@ export const login = async (req, res) => {
         lastname: user.lastName,
         location: user.location,
         occupation: user.occupation,
+        picturePath: user.picturePath,
       },
       process.env.JWT_SECRET
     );
