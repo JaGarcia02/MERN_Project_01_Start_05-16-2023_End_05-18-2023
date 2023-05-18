@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import fs from "fs";
 
 /* Register User */
 export const register = async (req, res) => {
@@ -9,7 +10,7 @@ export const register = async (req, res) => {
     lastName,
     email,
     password,
-    pucturePath,
+    picturePath,
     friends,
     location,
     occupation,
@@ -22,11 +23,11 @@ export const register = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
-      pucturePath,
+      picturePath,
       friends,
       location,
       occupation,
-      viewdProfile: Math.floor(Math.random() * 1000),
+      viewedProfile: Math.floor(Math.random() * 1000),
       impressions: Math.floor(Math.random() * 1000),
     });
     const savedUser = await newUser.save();
@@ -58,12 +59,11 @@ export const login = async (req, res) => {
     // jwt token signing
     const token = jwt.sign(
       {
-        id: user.id,
+        id: user._id,
         firstname: user.firstName,
         lastname: user.lastName,
         location: user.location,
         occupation: user.occupation,
-        picturePath: user.picturePath,
       },
       process.env.JWT_SECRET
     );

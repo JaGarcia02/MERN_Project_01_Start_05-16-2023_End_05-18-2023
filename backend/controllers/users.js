@@ -1,20 +1,21 @@
 import User from "../models/User.js";
 
-/* Read */
+/* READ */
 export const getUser = async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findById(id);
     return res.status(200).json(user);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
   }
 };
 
 export const getUserFriends = async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await user.findById(id);
+    const user = await User.findById(id);
+
     const friends = await Promise.all(
       user.friends.map((id) => User.findById(id))
     );
@@ -24,19 +25,18 @@ export const getUserFriends = async (req, res) => {
       }
     );
     return res.status(200).json(formattedFriends);
-  } catch (error) {
-    return res.status(404).json({ message: error.message });
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
   }
 };
 
-/* Update */
+/* UPDATE */
 export const addRemoveFriend = async (req, res) => {
   const { id, friendId } = req.params;
   try {
     const user = await User.findById(id);
     const friend = await User.findById(friendId);
 
-    // condition if friends existing in list
     if (user.friends.includes(friendId)) {
       user.friends = user.friends.filter((id) => id !== friendId);
       friend.friends = friend.friends.filter((id) => id !== id);
@@ -55,8 +55,9 @@ export const addRemoveFriend = async (req, res) => {
         return { _id, firstName, lastName, occupation, location, picturePath };
       }
     );
+
     return res.status(200).json(formattedFriends);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
   }
 };
