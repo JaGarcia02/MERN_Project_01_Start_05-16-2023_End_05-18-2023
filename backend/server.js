@@ -93,7 +93,7 @@ mongoose
 /* Notes:
 
   * use axios in the frontend when calling the routes of the backend, this project tutorial use fetch.
-  * same structure ond file system as mine
+  * same structure on file system as mine
   * this tutorial is missing creat/remove comments edit profile.
   * the reducx authSlice is ok but this tutorial dosen't auto logout when the token is gone.
   * this can be a good reference in the backend and the also the responsiveness of the frontend.
